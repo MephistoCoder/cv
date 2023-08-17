@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"
+    />
+
+    <title>Edit course</title>
+    <script th:src="@{/webjars/jquery/3.5.1/jquery.js}"></script>
+    <script
+      th:src="@{/webjars/bootstrap/5.2.0/js/bootstrap.bundle.min.js}"
+    ></script>
+    <script
+      th:src="@{/webjars/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js}"
+    ></script>
+    <script
+      th:src="@{/webjars/bootstrap-duallistbox/3.0.6/dist/jquery.bootstrap-duallistbox.min.js}"
+    ></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      th:href="@{/webjars/bootstrap-duallistbox/3.0.6/dist/bootstrap-duallistbox.css}"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light rounded">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/user/home">University CMS</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarsExample09"
+          aria-controls="navbarsExample09"
+          aria-expanded="false"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExample09">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="/user/schedule"
+                >Schedule</a
+              >
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                >University structure</a
+              >
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="/user/audiences">Audiences</a>
+                </li>
+                <li><a class="dropdown-item" href="/user/groups">Groups</a></li>
+                <li>
+                  <a class="dropdown-item" href="/user/courses">Courses</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/user/teachers">Teachers</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/user/students">Students</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/user/lessons_times"
+                    >Lessons times</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <a href="/perform_logout"
+          ><button class="btn btn-outline-primary">Logout</button></a
+        >
+      </div>
+    </nav>
+
+    <div class="d-flex align-items-center justify-content-center mt-4">
+      <form th:action="${courseDTO.id} == 0 ? @{/user/save-course} : @{/user/update-course}" method="post" th:object="${courseDTO}">
+        <div class="input-group mb-3 row">
+          <span class="input-group-text col-sm-5 justify-content-center"
+            >Id</span
+          >
+          <input
+            class="form-control col-sm-10"
+            type="input"
+            name="id"
+            th:value="${courseDTO.id}"
+            placeholder="Id"
+            readonly
+          />
+        </div>
+        <div class="input-group mb-3 row">
+          <span class="input-group-text col-sm-5 justify-content-center"
+            >Course name</span
+          >
+          <input
+            class="form-control col-sm-10"
+            type="input"
+            name="name"
+            th:value="${courseDTO.name}"
+            placeholder="Name"
+          />
+        </div>
+        <div class="input-group mb-3 row">
+          <span class="input-group-text col-sm-5 justify-content-center"
+            >Description</span
+          >
+          <input
+            class="form-control col-sm-10"
+            type="input"
+            name="description"
+            th:value="${courseDTO.description}"
+            placeholder="Description"
+          />
+        </div>
+        <div class="input-group mb-3 row">
+          <span class="input-group-text justify-content-center">Teachers</span>
+
+          <select
+            multiple="multiple"
+            size="10"
+            name="teachers[]"
+            id="teachersbox"
+            class="form-control col-auto justify-content-center"
+          >
+            <option
+              th:each="teacher: ${teachers}"
+              th:text="${teacher.firstName} + ' ' + ${teacher.lastName}"
+              th:value="${teacher.id}"
+            >
+              >
+            </option>
+            <option
+              th:each="teacherFromCourse : ${teachersFromCourse}"
+              th:text="${teacherFromCourse.firstName} + ' ' + ${teacherFromCourse.lastName}"
+              th:value="${teacherFromCourse.id}"
+              th:selected="true"
+            ></option>
+          </select>
+        </div>
+        <div class="input-group mb-3 row">
+          <input type="submit" value="Update course" class="btn btn-primary" />
+        </div>
+      </form>
+    </div>
+
+    <div class="container">
+      <footer class="d-flex flex-wrap align-items-center py-3 my-4 border-top">
+        <div class="container d-flex justify-content-center">
+          <p class="col-md-4 mb-0 text-muted">&copy; 2022 Bohdan Sharubin</p>
+        </div>
+
+        <ul class="container-fluid d-flex nav justify-content-center">
+          <li class="nav-item">
+            <a href="/user/home" class="nav-link px-2 text-muted"
+              >University CMS</a
+            >
+          </li>
+          <li class="nav-item">
+            <a href="/user/schedule" class="nav-link px-2 text-muted"
+              >Schedule</a
+            >
+          </li>
+          <li class="nav-item">
+            <a href="/user/audiences" class="nav-link px-2 text-muted"
+              >Audiences</a
+            >
+          </li>
+          <li class="nav-item">
+            <a href="/user/courses" class="nav-link px-2 text-muted">Courses</a>
+          </li>
+          <li class="nav-item">
+            <a href="/user/groups" class="nav-link px-2 text-muted">Groups</a>
+          </li>
+          <li class="nav-item">
+            <a href="/user/teachers" class="nav-link px-2 text-muted"
+              >Teachers</a
+            >
+          </li>
+          <li class="nav-item">
+            <a href="/user/students" class="nav-link px-2 text-muted"
+              >Students</a
+            >
+          </li>
+          <li class="nav-item">
+            <a href="/user/lessons_times" class="nav-link px-2 text-muted"
+              >Lessons times</a
+            >
+          </li>
+        </ul>
+      </footer>
+    </div>
+
+    <script>
+      $("#teachersbox").bootstrapDualListbox({
+        nonSelectedListLabel: "All teachers",
+        selectedListLabel: "Teachers of course",
+        preserveSelectionOnMove: "moved",
+        moveOnSelect: true,
+      });
+    </script>
+  </body>
+</html>

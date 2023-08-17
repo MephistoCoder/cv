@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin panel</title>
+    <link
+      rel="stylesheet"
+      th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light rounded">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/admin-panel">University CMS</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarsExample09"
+          aria-controls="navbarsExample09"
+          aria-expanded="false"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExample09">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="/user/schedule"
+                >Schedule</a
+              >
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                >University structure</a
+              >
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="/user/audiences">Audiences</a>
+                </li>
+                <li><a class="dropdown-item" href="/user/groups">Groups</a></li>
+                <li>
+                  <a class="dropdown-item" href="/user/courses">Courses</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/user/teachers">Teachers</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/user/students">Students</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/user/lessons_times"
+                    >Lessons times</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <a href="/perform_logout"
+          ><button class="btn btn-outline-primary">Logout</button></a
+        >
+      </div>
+    </nav>
+
+    <table class="table table-striped">
+      <tr>
+        <th>Id</th>
+        <th>Username</th>
+        <th>Role</th>
+        <th></th>
+      </tr>
+      <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.role}"></td>
+        <td>
+          <form
+            action="/edit-user"
+            method="post"
+            th:object="${userDTO}"
+            modelAttribute="userDTO"
+          >
+            <input type="submit" value="Change role" class="btn btn-primary" />
+            <input type="hidden" name="id" th:value="${user.id}" />
+            <input type="hidden" name="role" th:value="${user.role}" />
+            <input type="hidden" name="username" th:value="${user.username}" />
+          </form>
+        </td>
+      </tr>
+    </table>
+
+    <div class="container">
+      <footer class="d-flex flex-wrap align-items-center py-3 my-4 border-top">
+        <div class="container d-flex justify-content-center">
+          <p class="col-md-4 mb-0 text-muted">&copy; 2022 Bohdan Sharubin</p>
+        </div>
+      </footer>
+    </div>
+
+    <script
+      th:src="@{/webjars/bootstrap/5.2.0/js/bootstrap.bundle.min.js}"
+    ></script>
+  </body>
+</html>

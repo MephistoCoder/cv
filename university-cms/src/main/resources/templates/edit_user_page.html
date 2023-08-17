@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin panel</title>
+    <link
+      rel="stylesheet"
+      th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light rounded">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/admin/admin-page">University CMS</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarsExample09"
+          aria-controls="navbarsExample09"
+          aria-expanded="false"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <a href="/perform_logout"
+          ><button class="btn btn-outline-primary">Logout</button></a
+        >
+      </div>
+    </nav>
+
+    <div class="d-flex align-items-center justify-content-center mt-4">
+      <form action="/update-user" method="post" th:object="${userDTO}">
+        <div class="input-group mb-3 row">
+          <span class="input-group-text col-sm-5 justify-content-center"
+            >Id</span
+          >
+          <input
+            class="form-control col-sm-10"
+            type="input"
+            name="id"
+            th:value="${user.id}"
+            readonly
+          />
+        </div>
+        <div class="input-group mb-3 row">
+          <span class="input-group-text col-sm-5 justify-content-center"
+            >Username</span
+          >
+          <input
+            class="form-control col-sm-10"
+            type="input"
+            name="username"
+            th:value="${user.username}"
+            placeholder="Username"
+            readonly
+          />
+        </div>
+        <div class="input-group mb-3 row">
+          <span class="input-group-text col-sm-5 justify-content-center"
+            >Role</span
+          >
+          <select class="form-select col-sm-10" name="role" id="roleSelect">
+            <option
+              th:each="role : ${T(com.foxminded.bohdansharubin.universitycms.models.Roles).values()}"
+              th:value="${role}"
+              th:text="${role}"
+              th:selected="${role.authority == user.role.authority}"
+            ></option>
+          </select>
+        </div>
+        <div class="input-group mb-3 row">
+          <input type="submit" value="Change role" class="btn btn-primary" />
+        </div>
+      </form>
+    </div>
+
+    <div class="container">
+      <footer
+        class="d-flex flex-wrap align-items-center py-3 my-4 border-top fixed-bottom"
+      >
+        <div class="container d-flex justify-content-center">
+          <p class="col-md-4 mb-0 text-muted">&copy; 2022 Bohdan Sharubin</p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

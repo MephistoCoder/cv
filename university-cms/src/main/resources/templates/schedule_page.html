@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"
+    />
+    <link
+      rel="stylesheet"
+      th:href="@{/webjars/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css}"
+    />
+    <script th:src="@{/webjars/jquery/3.5.1/jquery.js}"></script>
+    <script
+      th:src="@{/webjars/bootstrap/5.2.0/js/bootstrap.bundle.min.js}"
+    ></script>
+    <script
+      th:src="@{/webjars/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js}"
+    ></script>
+    <title>Schedule</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light rounded">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/user/home">University CMS</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarsExample09"
+          aria-controls="navbarsExample09"
+          aria-expanded="false"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExample09">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="/user/schedule"
+                >Schedule</a
+              >
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                >University structure</a
+              >
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="/user/audiences">Audiences</a>
+                </li>
+                <li><a class="dropdown-item" href="/user/groups">Groups</a></li>
+                <li>
+                  <a class="dropdown-item" href="/user/courses">Courses</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/user/teachers">Teachers</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/user/students">Students</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/user/lessons_times"
+                    >Lessons times</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <a href="/perform_logout"
+          ><button class="btn btn-outline-primary">Logout</button></a
+        >
+      </div>
+    </nav>
+
+    <div class="container-fluid d-flex mb-4 mt-4 justify-content-center">
+      <form action="" method="get">
+        <span class="input-group input-group-text justify-content-center row"
+          >Date</span
+        >
+        <div class="input-daterange mb-3 input-group row" id="datepicker">
+          <label class="input-group-text col-sm-2">From</label>
+          <input
+            type="text"
+            class="input-sm form-control col"
+            name="start"
+            placeholder="start date"
+          />
+          <span class="input-group-text col-sm-2 justify-content-center"
+            >To</span
+          >
+          <input
+            type="text"
+            class="input-sm form-control col"
+            name="end"
+            placeholder="end date"
+          />
+        </div>
+        <div class="input-group mb-3 row">
+          <span class="input-group-text col-sm-2">Group</span>
+          <select class="form-select col-sm-10" name="group" id="groupSelect">
+            <option value="">Choose group..</option>
+            <option value="">Group 1</option>
+          </select>
+        </div>
+        <div class="input-group mb-3 row">
+          <span class="input-group-text col-sm-2">Course</span>
+          <select class="form-select col-sm-10" name="course" id="courseSelect">
+            <option value="">Choose course..</option>
+            <option value="">Course 1</option>
+          </select>
+        </div>
+
+        <div class="input-group mb-3 row">
+          <span class="input-group-text col-sm-2">Teacher</span>
+          <select
+            class="form-select col-sm-10"
+            name="teacher"
+            id="teacherSelect"
+          >
+            <option value="">Choose teacher..</option>
+            <option value="">Teacher 1</option>
+          </select>
+        </div>
+        <div class="input-group mb-3 row">
+          <input class="btn btn-primary" type="submit" value="Search" />
+        </div>
+      </form>
+    </div>
+
+    <div class="container">
+      <footer
+        class="d-flex flex-wrap align-items-center py-3 my-4 border-top"
+      >
+        <div class="container d-flex justify-content-center">
+          <p class="col-md-4 mb-0 text-muted">&copy; 2022 Bohdan Sharubin</p>
+        </div>
+
+        <ul class="container-fluid d-flex nav justify-content-center">
+          <li class="nav-item">
+            <a href="/user/home" class="nav-link px-2 text-muted"
+              >University CMS</a
+            >
+          </li>
+          <li class="nav-item">
+            <a href="/user/schedule" class="nav-link px-2 text-muted"
+              >Schedule</a
+            >
+          </li>
+          <li class="nav-item">
+            <a href="/user/audiences" class="nav-link px-2 text-muted"
+              >Audiences</a
+            >
+          </li>
+          <li class="nav-item">
+            <a href="/user/courses" class="nav-link px-2 text-muted">Courses</a>
+          </li>
+          <li class="nav-item">
+            <a href="/user/groups" class="nav-link px-2 text-muted">Groups</a>
+          </li>
+          <li class="nav-item">
+            <a href="/user/teachers" class="nav-link px-2 text-muted"
+              >Teachers</a
+            >
+          </li>
+          <li class="nav-item">
+            <a href="/user/students" class="nav-link px-2 text-muted"
+              >Students</a
+            >
+          </li>
+          <li class="nav-item">
+            <a href="/user/lessons_times" class="nav-link px-2 text-muted"
+              >Lessons times</a
+            >
+          </li>
+        </ul>
+      </footer>
+    </div>
+
+    <script>
+      $(" .input-daterange").datepicker({
+        format: "dd/mm/yyyy",
+        todayBtn: "linked",
+        clearBtn: true,
+        multidate: false,
+        daysOfWeekDisabled: "0",
+        autoclose: true,
+        todayHighlight: true,
+      });
+    </script>
+  </body>
+</html>
